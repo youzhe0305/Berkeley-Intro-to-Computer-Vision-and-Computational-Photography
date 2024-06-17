@@ -21,7 +21,7 @@ def binarize(grad_mag, threshold):
 
 def get_gaussian_blur_img(img, ksize=5, sigma=1.0):
     G = cv2.getGaussianKernel(ksize=ksize, sigma=sigma) # Guassian filter, ksize*1, value distribute according to guassian distribution
-    G = np.outer(G,np.transpose(G))
+    G = np.outer(G,np.transpose(G)) # ksize * ksize filter
     return signal.convolve2d(img, G, boundary='symm', mode='same')
 
 def part1_1(): # directly binarize
@@ -73,7 +73,7 @@ def part1_3(): # DoG
     img = cv2.imread('intake/cameraman.png', cv2.IMREAD_GRAYSCALE)
     blur_img1 = get_gaussian_blur_img(img)
     blur_img2 = get_gaussian_blur_img(img, sigma=5.0)
-    DoG = blur_img1 - blur_img2
+    DoG = cv2.subtract(blur_img1, blur_img2)
     binary_img = binarize(DoG, 1)
     binary_img_F32 = binary_img.astype(np.float32) 
     cv2.imshow('windows', binary_img_F32) # accuracy too high

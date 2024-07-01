@@ -45,7 +45,7 @@ def part2_2():
     img_for_low = cv2.imread('intake/DerekPicture.jpg', cv2.IMREAD_COLOR)
     img_for_high = cv2.imread('intake/nutmeg.jpg', cv2.IMREAD_COLOR)
 
-    def get_high_pass_img(img, ksize=5, sigma=1.0):
+    def get_high_pass_img(img, ksize=9, sigma=11.0):
         b_img, g_img, r_img = cv2.split(img)
         blur_r_img = get_gaussian_blur_img(r_img, ksize=ksize, sigma=sigma)
         blur_g_img = get_gaussian_blur_img(g_img, ksize=ksize, sigma=sigma)
@@ -60,7 +60,7 @@ def part2_2():
     target_size = (low_pass_img.shape[1], low_pass_img.shape[0])
     high_pass_img = cv2.resize(high_pass_img, target_size)
 
-    hybrid_img = (low_pass_img + high_pass_img).astype(np.uint8)
+    hybrid_img = (low_pass_img + high_pass_img * 0.1).astype(np.uint8)
 
     cv2.imshow('windows', hybrid_img)
     cv2.waitKey(0)
@@ -141,6 +141,6 @@ def part2_4():
 if __name__ == '__main__':
 
     #part2_1()
-    #part2_2()
+    part2_2()
     #part2_3()
-    part2_4()
+    #part2_4()

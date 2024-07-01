@@ -36,7 +36,7 @@ def displacement_search(img1, img2, std, scale, displace_range_x = 2, displace_r
 
     min_norm = 1e18
     best_displacement = std
-    for i in range(-int(displace_range_y/scale), int(displace_range_y/scale), 1):
+    for i in range(-int(displace_range_y/scale), int(displace_range_y/scale), 1): # 16px 8px 4px 2px 
         for j in range(-int(displace_range_x/scale), int(displace_range_x/scale), 1):
             shifted_img1 = np.roll(img1, (std[0] * 2 + i, std[1] * 2 + j), axis=(0,1)) # scale*2, std*2
             norm = L2_Norm(shifted_img1, img2)
@@ -75,7 +75,7 @@ if __name__ == '__main__':
     
     combined_img = np.stack((R_img, shifted_G_img, shifted_B_img), axis=2)
     print(combined_img.shape)
-    cv2.imwrite('output.jpg', combined_img)
+    cv2.imwrite('output/arches_.jpg', combined_img)
 
     cv2.imshow('windows', combined_img)
     cv2.waitKey(0)

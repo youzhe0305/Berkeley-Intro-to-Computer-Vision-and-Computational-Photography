@@ -141,6 +141,6 @@ def part2_4():
 if __name__ == '__main__':
 
     #part2_1()
-    part2_2()
+    #part2_2()
     #part2_3()
-    #part2_4()
+    part2_4()

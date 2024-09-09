@@ -93,12 +93,12 @@ def feature_get(img1, img2):
 
     pts1 = np.float32([features1[m.queryIdx].pt for m in good_matches]) # 找出原圖的用來做match的幾個特徵點
     pts2 = np.float32([features2[m.trainIdx].pt for m in good_matches]) # 找出對應圖的特徵點
-    # inliers_idx = RANSAC(pts1, pts2)
-    # pts1 = pts1[inliers_idx]
-    # pts2 = pts2[inliers_idx]
-    # good_matches = []
-    # for i in inliers_idx:  
-    #     good_matches.append(matches[i])
+    inliers_idx = RANSAC(pts1, pts2)
+    pts1 = pts1[inliers_idx]
+    pts2 = pts2[inliers_idx]
+    good_matches = []
+    for i in inliers_idx:  
+        good_matches.append(matches[i])
     
     np.save('img_corr_point/box/1.npy', pts1)
     np.save('img_corr_point/box/2.npy', pts2)
